@@ -1,0 +1,25 @@
+name: GOAT Compile
+
+on: 
+  push:
+      branches:
+       - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obteniendo ultima versio del codigo"
+        uses: actions/checkout@v3
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      -name: "Compilacion"    
+        run: ./mvnw clean install
+
+      -name: "Verificar paquete"
+        run: ls -ltra target
