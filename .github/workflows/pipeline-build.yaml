@@ -30,6 +30,12 @@ jobs:
       - name: "Obteniendo version"
         uses: actions/checkout@v2
 
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
       - name: "Compilacion 2"
         run: ./mvnw clean install
 
