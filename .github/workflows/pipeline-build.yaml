@@ -18,8 +18,8 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      -name: "Compilacion"    
+      - name: "Compilacion"    
         run: ./mvnw clean install
 
-      -name: "Verificar paquete"
+      - name: "Verificar paquete"
         run: ls -ltra target
