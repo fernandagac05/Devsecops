@@ -23,3 +23,30 @@ jobs:
 
       - name: "Verificar paquete"
         run: ls -ltra target
+
+  sca:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: "Obteniendo version"
+        uses: actions/checkout@v2
+
+      - name: "Compilacion 2"
+        run: ./mvnw clean install
+
+      - name: "Dependency-check"
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'test'
+          path: '.'
+          format: 'HTML'
+          out: 'reports' # this is the default, no need to specify unless you wish to override it
+          args: >
+            --failOnCVSS 7
+            --enableRetired
+
+      - name: "Resultados del test"
+        uses: actions/upload-artifact@master
+        with:
+          name: "Reporte"
+          path: ${{github.workspace}}/reports
