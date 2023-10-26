@@ -63,7 +63,7 @@ jobs:
         run: docker build -t prueba ./
 
       - name: "Verificar imagen"
-        run: ls -ltra 
+        run: docker images 
 
   horusec:
     runs-on: ubuntu-latest
