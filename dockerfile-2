@@ -1,0 +1,4 @@
+FROM php:7.0-apache
+RUN mkdir /home/prueba
+COPY ./code /home/prueba
+EXPOSE 80
