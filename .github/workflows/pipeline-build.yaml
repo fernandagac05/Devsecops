@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Crear la imagen"
-        run: docker build -t test -f dockerfile-2. 
+        run: docker build -t test . 
 
       - name: "Verificar paquete"
         run: docker images
