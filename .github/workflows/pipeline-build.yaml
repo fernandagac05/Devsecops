@@ -58,4 +58,25 @@ jobs:
 
       - name: "Verificar reporte"
         run: ls -ltra reports
+
+  horusec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Obteniendo ultima versio del codigo"
+        uses: actions/checkout@v3
+
+      - name: "Instalacion de Java"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: "Compilacion 3"    
+        run: ./mvnw clean install
+
+      - name: "Ejecucion de horusec"
+        id: run_horusec
+        uses: fike/horusec-action@v1
+        with:
+          arguments: -p="./" --return-error true
         
