@@ -76,7 +76,7 @@ jobs:
 
       - name: "Ejecucion de horusec"
         id: run_horusec
-        uses: fike/horusec-action@v1
+        uses: fike/horusec-action@v0.1
         with:
           arguments: -p="./" --return-error true
         
