@@ -71,9 +71,10 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: "Instalar horusec"
+        run: curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/main/deployments/scripts/install.sh | bash -s latest-beta
+
       - name: "Ejecucion de horusec"
         id: run_horusec
-        uses: fike/horusec-action@v0.1
-        with:
-          arguments: -p="./" --return-error true
+        run: horusec start -p="./" --return-error -e="false"
         
