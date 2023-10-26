@@ -59,6 +59,9 @@ jobs:
       - name: "Verificar reporte"
         run: ls -ltra reports
 
+      - name: "Crear imagen de Docker"
+        run: docker build -t prueba ./
+
   horusec:
     runs-on: ubuntu-latest
     steps:
@@ -81,19 +84,4 @@ jobs:
           arguments: -p="./" --return-error -e="false"
         #run: horusec start -p="./" --return-error -e="false"
 
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Set up Docker Buildx"
-        uses: docker/setup-buildx-action@master
-      - name: "Build and push"
-        uses: docker/build-push-action@v5
-        with:
-          context: ./
-          file: ./Dockerfile
-          push: true
-          tags: user/app:latest
-      - name: "Image digest"
-        run: echo ${{ steps.docker_build.outputs.digest }}
-
-        
+  
