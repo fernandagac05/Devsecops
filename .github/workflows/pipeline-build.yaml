@@ -80,4 +80,14 @@ jobs:
         with:
           arguments: -p="./" --return-error -e="false"
         #run: horusec start -p="./" --return-error -e="false"
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Crear la imagen"
+        run: docker build -t test . 
+
+      - name: "Verificar paquete"
+        run: docker images
+
         
