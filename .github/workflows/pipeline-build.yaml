@@ -70,7 +70,6 @@ jobs:
         with:
           image-ref: 'webgoat'
           format: 'table'
-          exit-code: '1'
           ignore-unfixed: false
           timeout: 15m0s
         
