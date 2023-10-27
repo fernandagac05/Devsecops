@@ -66,10 +66,12 @@ jobs:
         run: docker images 
 
       - name: "Ejecutar trivy"
-        run: |
-              wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
-              sudo dpkg -i trivy_0.18.3_Linux-64bit.deb 
-              trivy image webgoat
+        uses: aquasecurity/trivy-action@main
+        with:
+          image-ref: 'webgoat'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: false
 
       - name: "Crear contenedor"
         run: docker run -d -p 8080:8080 --name container-prueba webgoat
