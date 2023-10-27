@@ -68,7 +68,7 @@ jobs:
       - name: "Ejecutar trivy"
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: webgoat
+          image-ref: './webgoat'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: false
