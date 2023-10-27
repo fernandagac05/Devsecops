@@ -66,7 +66,12 @@ jobs:
         run: docker images 
 
       - name: "Ejecutar trivy"
-        run: sudo trivy image webgoat
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: webgoat
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: false
 
       - name: "Crear contenedor"
         run: docker run -d -p 8080:8080 --name container-prueba webgoat
