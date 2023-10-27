@@ -68,10 +68,11 @@ jobs:
       - name: "Ejecutar trivy"
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'webgoat:${{ github.sha }}'
+          image-ref: 'webgoat'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: false
+          timeout: 15m0s
         
 
       - name: "Crear contenedor"
