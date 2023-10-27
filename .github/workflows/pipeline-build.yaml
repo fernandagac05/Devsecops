@@ -66,13 +66,11 @@ jobs:
         run: docker images 
 
       - name: "Crear contenedor"
-        run: docker run -d --name container-prueba webgoat
+        run: docker run -d -p 8080:8080 --name container-prueba webgoat
 
       - name: "Verificar contenedor"
-        run: docker container ls -a
+        run: docker ps -a
 
-      - name: "Correr contenedor"
-        run: docker run -d container-prueba
 
   horusec:
     runs-on: ubuntu-latest
