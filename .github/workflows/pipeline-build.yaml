@@ -66,7 +66,7 @@ jobs:
         run: docker images 
 
       - name: "Ejecutar trivy"
-        run: trivy image webgoat
+        run: sudo trivy image webgoat
 
       - name: "Crear contenedor"
         run: docker run -d -p 8080:8080 --name container-prueba webgoat
