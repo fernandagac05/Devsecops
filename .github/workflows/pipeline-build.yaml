@@ -60,10 +60,19 @@ jobs:
         run: ls -ltra reports
 
       - name: "Crear imagen de Docker"
-        run: docker build -t prueba ./
+        run: docker build -t webgoat ./
 
       - name: "Verificar imagen"
         run: docker images 
+
+      - name: "Crear contenedor"
+        run: docker run -d -p 80:80 --name container-prueba -v webgoat
+
+      - name: "Verificar contenedor"
+        run: docker container ls -a
+
+      - name: "Correr contenedor"
+        run: docker run container-prueba
 
   horusec:
     runs-on: ubuntu-latest
