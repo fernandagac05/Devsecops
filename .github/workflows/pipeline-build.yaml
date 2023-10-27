@@ -72,7 +72,7 @@ jobs:
         run: docker container ls -a
 
       - name: "Correr contenedor"
-        run: docker run container-prueba
+        run: docker run -d container-prueba
 
   horusec:
     runs-on: ubuntu-latest
