@@ -63,7 +63,7 @@ jobs:
               var_IP=$(terraform -chdir=../terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
               sed -i "s/INSTANCIA/$var_IP/" inventario
               export ANSIBLE_HOST_KEY_CHECKING=False
-              sudo ansible-playbook -i inventario server.yaml --become
+              sudo ansible-playbook -i inventario server.yaml --become --private-key $HOME/key.pem
         continue-on-error: true
 
       - name: "Descargar arachni"
