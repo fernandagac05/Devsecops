@@ -58,7 +58,7 @@ jobs:
               sudo apt update
               sudo apt install -y ansible
               cd ansible/
-              echo "$PRIVATE_KEY" >> $HOME/key.pem
+              echo $PRIVATE_KEY >> $HOME/key.pem
               sudo chmod 600 $HOME/key.pem
               var_IP=$(terraform -chdir=../terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
               sed -i "s/INSTANCIA/$var_IP/" inventario
