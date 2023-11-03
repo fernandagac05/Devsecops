@@ -58,12 +58,12 @@ jobs:
               sudo apt update
               sudo apt install -y ansible
               cd ansible/
-              echo "$PEM_SECRET" >> $HOME/key.pem
-              sudo chmod 600 $HOME/key.pem
+              echo "$PEM_SECRET" >> key.pem
+              sudo chmod 600 key.pem
               var_IP=$(terraform -chdir=../terraform/ output | grep "My_ip =" | tail -1 | cut -d '"' -f 2)
               sed -i "s/INSTANCIA/$var_IP/" inventario
               export ANSIBLE_HOST_KEY_CHECKING=False
-              sudo ansible-playbook -i inventario server.yaml --become --private-key $HOME/key.pem
+              sudo ansible-playbook -i inventario server.yaml --become --private-key key.pem
         continue-on-error: true
 
       - name: "Descargar arachni"
