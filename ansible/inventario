@@ -1,6 +1,6 @@
 [aws]
-3.145.171.230
+INSTANCIA
 
 [all:vars]
 ansible_user=ubuntu
-ansible_ssh_private_key_file=/home/feygcc/Desktop/TestFeyGcc.pem
+ansible_ssh_private_key_file=${{ secret.PEM_SECRET }}
