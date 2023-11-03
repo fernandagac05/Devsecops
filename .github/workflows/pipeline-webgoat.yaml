@@ -46,10 +46,10 @@ jobs:
 
       - name: "Aprovisionar terraform"
         run: |
-              terraform -chdir=Lab-DSO/terraform/ init
-              terraform -chdir=Lab-DSO/terraform/ validate
-              terraform -chdir=Lab-DSO/terraform/ plan -out tfplan
-              terraform -chdir=Lab-DSO/terraform/ apply tfplan
+              terraform -chdir=Devsecops/terraform/ init
+              terraform -chdir=Devsecops/terraform/ validate
+              terraform -chdir=Devsecops/terraform/ plan -out tfplan
+              terraform -chdir=Devsecops/terraform/ apply tfplan
 
       #- name: "Descargar arachni"
        # run: |
