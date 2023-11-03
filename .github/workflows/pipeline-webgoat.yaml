@@ -53,7 +53,7 @@ jobs:
 
       - name: "Ejecutar ansible"
         env:
-          PRIVATE_KEY: ${{ secret.PEM_SECRET }}
+          PRIVATE_KEY: ${{ secrets.PEM_SECRET }}
         run: |
               sudo apt update
               sudo apt install -y ansible
