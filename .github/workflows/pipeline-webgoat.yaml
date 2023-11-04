@@ -39,10 +39,29 @@ jobs:
 
       - name: "Cargar imagen a ECR"
         run: |
-              aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n3j7o1e0
+              aws ecr-public get-login-password --region us-east-2 | docker login --username AWS --password-stdin public.ecr.aws/n3j7o1e0
               docker build -t fernandagarcia .
               docker tag fernandagarcia:latest public.ecr.aws/n3j7o1e0/fernandagarcia:latest
               docker push public.ecr.aws/n3j7o1e0/fernandagarcia:latest
+
+      - name: "Instalar python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+      - name: "Ejecutar Checkov"
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: example/examplea
+          framework: terraform
+          output_format: sarif
+          output_file_path: reports/results.sarif
+
+      - name: "SUbir reporte"
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: results.sarif
 
       - name: "Aprovisionar terraform"
         run: |
