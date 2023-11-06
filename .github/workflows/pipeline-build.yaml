@@ -50,16 +50,11 @@ jobs:
           format: 'SARIF'
           out: 'reportsDC' # this is the default, no need to specify unless you wish to override it
 
-      - name: "Resultados del test"
-        uses: actions/upload-artifact@master
-        with:
-          name: "Reporte"
-          path:  reportsDC
-
-      #- name: "Subir SARIF"
-       # uses: github/codeql-action/upload-sarif@v2        
-        #with:          # Path to SARIF file relative to the root of the repository          
-         # sarif_file: ${{github.workspace}}/reports/reportsDC.sarif
+      - name: "Subir SARIF"
+        uses: github/codeql-action/upload-sarif@v2        
+        with:          # Path to SARIF file relative to the root of the repository          
+          sarif_file: ${{github.workspace}}/reportsDC
+          checkout_path: ${{github.workspace}}/reportsDC
 
       - name: "Verificar reporte"
         run: ls -ltra reportsDC
@@ -83,7 +78,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
-        
+          category: 'code'
 
       - name: "Crear contenedor"
         run: docker run -d -p 8080:8080 --name container-prueba webgoat
