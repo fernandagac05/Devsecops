@@ -47,7 +47,7 @@ jobs:
         with:
           project: 'WebGoat'
           path: '.'
-          format: 'sarif'
+          format: 'SARIF'
           out: 'reportsDC' # this is the default, no need to specify unless you wish to override it
 
       - name: "Resultados del test"
