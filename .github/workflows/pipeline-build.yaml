@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: "Reporte"
-          path:  /github/workspace/reportsDC/dependency-check-report.sarif
+          path:  reportsDC
 
       #- name: "Subir SARIF"
        # uses: github/codeql-action/upload-sarif@v2        
@@ -62,7 +62,7 @@ jobs:
          # sarif_file: ${{github.workspace}}/reports/reportsDC.sarif
 
       - name: "Verificar reporte"
-        run: ls -ltra reports
+        run: ls -ltra reportsDC
 
       - name: "Crear imagen de Docker"
         run: docker build -t webgoat ./
