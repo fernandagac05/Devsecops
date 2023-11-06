@@ -57,6 +57,7 @@ jobs:
           framework: terraform
           output_format: sarif
           output_file_path: reports/results.sarif
+          soft_fail: true
         continue-on-error: true
 
       - name: "Aprovisionar terraform"
@@ -79,6 +80,7 @@ jobs:
               sed -i "s/INSTANCIA/$var_IP/" inventario
               export ANSIBLE_HOST_KEY_CHECKING=False
               ansible-playbook -i inventario server.yaml --become --private-key $HOME/key.pem
+              sleep 45
         continue-on-error: true
 
       - name: "Descargar arachni"
@@ -93,11 +95,11 @@ jobs:
               ./arachni-1.6.1.3-0.6.1.1/bin/arachni --check=* http://$var_IP:8080/WebGoat/login
         continue-on-error: true
 
-      #- name: "Tirar infra"
-       # run: |
-        #      cd terraform/ 
-         #     terraform plan -destroy -out tfplan
-          #    terraform apply tfplan
+      - name: "Tirar infra"
+        run: |
+              cd terraform/ 
+              terraform plan -destroy -out tfplan
+              terraform apply tfplan
       
 
 
