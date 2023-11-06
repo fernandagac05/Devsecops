@@ -74,9 +74,15 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'webgoat'
-          format: 'table'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
           ignore-unfixed: false
-          timeout: 15m0s
+          timeout: 15m0ss
+
+      - name: "Subir reporte de trivi a scan"
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
         
 
       - name: "Crear contenedor"
