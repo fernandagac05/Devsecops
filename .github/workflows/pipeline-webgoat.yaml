@@ -39,7 +39,7 @@ jobs:
 
       - name: "Cargar imagen a ECR"
         run: |
-              aws ecr-public get-login-password --region us-east-2 | docker login --username AWS --password-stdin public.ecr.aws/n3j7o1e0
+              aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n3j7o1e0
               docker build -t fernandagarcia .
               docker tag fernandagarcia:latest public.ecr.aws/n3j7o1e0/fernandagarcia:latest
               docker push public.ecr.aws/n3j7o1e0/fernandagarcia:latest
