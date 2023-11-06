@@ -21,8 +21,8 @@ jobs:
       #- name: "Compilacion"    
        # run: ./mvnw clean install
 
-      - name: "Verificar paquete"
-        run: ls -ltra target
+      #- name: "Verificar paquete"
+       # run: ls -ltra target
 
       - name: "Crear imagen de Docker"
         run: docker build -t webgoat ./
