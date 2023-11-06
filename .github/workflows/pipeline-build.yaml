@@ -54,12 +54,12 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: "Reporte"
-          path: ${{github.workspace}}/reports
+          path:  /github/workspace/reportsDC/dependency-check-report.sarif
 
-      - name: "Subir SARIF"
-        uses: github/codeql-action/upload-sarif@v2        
-        with:          # Path to SARIF file relative to the root of the repository          
-          sarif_file: ${{github.workspace}}/reports/reportsDC.sarif
+      #- name: "Subir SARIF"
+       # uses: github/codeql-action/upload-sarif@v2        
+        #with:          # Path to SARIF file relative to the root of the repository          
+         # sarif_file: ${{github.workspace}}/reports/reportsDC.sarif
 
       - name: "Verificar reporte"
         run: ls -ltra reports
