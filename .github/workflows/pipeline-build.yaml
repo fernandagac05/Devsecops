@@ -51,13 +51,15 @@ jobs:
 
       - name: "Secreto token"
         env:
-          SECRET_TOKEN: ${{ TOKEN_DD }}
+          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
         
 
       - name: "Dependency-check"
         uses: dependency-check/Dependency-Check_Action@main
         env:
           JAVA_HOME: /opt/jdk
+          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
+        
         id: Depcheck
         with:
           project: 'WebGoat'
