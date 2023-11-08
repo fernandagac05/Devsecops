@@ -36,6 +36,11 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: "Instalar python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
       - name: "Compilacion 2"
         run: ./mvnw clean install
 
@@ -47,17 +52,21 @@ jobs:
         with:
           project: 'WebGoat'
           path: '.'
-          format: 'SARIF'
+          format: 'XML'
           out: 'reportsDC' # this is the default, no need to specify unless you wish to override it
 
-      - name: "Subir SARIF"
-        uses: github/codeql-action/upload-sarif@v2        
-        with:          # Path to SARIF file relative to the root of the repository          
-          sarif_file: ${{github.workspace}}/reportsDC
-          checkout_path: ${{github.workspace}}/reportsDC
+      #- name: "Subir SARIF"
+       # uses: github/codeql-action/upload-sarif@v2        
+        #with:          # Path to SARIF file relative to the root of the repository          
+         # sarif_file: ${{github.workspace}}/reportsDC
+          #checkout_path: ${{github.workspace}}/reportsDC
 
       - name: "Verificar reporte"
         run: ls -ltra reportsDC
+
+      - name: "Subir Dep-Check scan a DefectDojo"
+        run: |
+              python3 upload-report.py --file reportsDC/dependency-check-report.xml --type-scan 'Dependency Check Scan'
 
       - name: "Crear imagen de Docker"
         run: docker build -t webgoat ./
@@ -69,16 +78,20 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'webgoat'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          format: 'json'
+          output: 'trivy-results.json'
           ignore-unfixed: false
           timeout: 15m0s
 
-      - name: "Subir reporte de trivi a scan"
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
-          category: 'code'
+      - name: "Subir Trivy scan a DefectDojo"
+        run: |
+              python3 upload-report.py --file trivy-results.json --type-scan 'Trivy Scan' 
+
+      #- name: "Subir reporte de trivi a scan"
+       # uses: github/codeql-action/upload-sarif@v2
+        #with:
+         # sarif_file: 'trivy-results.sarif'
+          #category: 'code'
 
       - name: "Crear contenedor"
         run: docker run -d -p 8080:8080 --name container-prueba webgoat
@@ -98,16 +111,6 @@ jobs:
         run: |
               var_IP=$(docker inspect container-prueba | grep "IPAddress" | tail -1 | cut -d '"' -f 4)
               ./arachni-1.6.1.3-0.6.1.1/bin/arachni --check=* http://$var_IP:8080/WebGoat/login
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: ${{ matrix.language }}
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
-        with:
-          category: "/language:${{matrix.language}}"
 
 
 
