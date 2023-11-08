@@ -41,6 +41,7 @@ jobs:
         with:
           python-version: 3.8
 
+      - name: "Actualizar dep de python"
         run: |
               pip3 install --upgrade pip
 
