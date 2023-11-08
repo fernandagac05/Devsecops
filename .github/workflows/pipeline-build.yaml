@@ -53,8 +53,8 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         env:
           JAVA_HOME: /opt/jdk
-          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
-        
+
+
         id: Depcheck
         with:
           project: 'WebGoat'
@@ -72,6 +72,8 @@ jobs:
         run: ls -ltra reportsDC
 
       - name: "Subir Dep-Check scan a DefectDojo"
+        env:
+          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
         run: |
               python3 upload-report.py --file reportsDC/dependency-check-report.xml --type-scan 'Dependency Check Scan'
 
