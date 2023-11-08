@@ -44,9 +44,7 @@ jobs:
       - name: "Actualizar dep de python"
         run: |
               pip3 install requests
-              pip3 install json
-              pip3 install argparse
-
+              
       - name: "Compilacion 2"
         run: ./mvnw clean install
 
