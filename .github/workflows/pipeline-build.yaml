@@ -48,10 +48,6 @@ jobs:
 
       - name: "Compilacion 2"
         run: ./mvnw clean install
-
-      - name: "Secreto token"
-        env:
-          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
         
 
       - name: "Dependency-check"
@@ -96,6 +92,8 @@ jobs:
           timeout: 15m0s
 
       - name: "Subir Trivy scan a DefectDojo"
+        env:
+          SECRET_TOKEN: ${{ secrets.TOKEN_DD }}
         run: |
               python3 upload-report.py --file trivy-results.json --type-scan 'Trivy Scan' 
 
