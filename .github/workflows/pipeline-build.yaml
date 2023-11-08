@@ -44,9 +44,14 @@ jobs:
       - name: "Actualizar dep de python"
         run: |
               pip3 install requests
-              
+
       - name: "Compilacion 2"
         run: ./mvnw clean install
+
+      - name: "Secreto token"
+        env:
+          SECRET_TOKEN: ${{ TOKEN_DD }}
+        
 
       - name: "Dependency-check"
         uses: dependency-check/Dependency-Check_Action@main
