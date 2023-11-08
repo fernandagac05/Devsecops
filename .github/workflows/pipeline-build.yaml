@@ -44,6 +44,7 @@ jobs:
       - name: "Actualizar dep de python"
         run: |
               pip3 install requests
+              pip3 install os
 
       - name: "Compilacion 2"
         run: ./mvnw clean install
